@@ -37,9 +37,7 @@ class UserAgent {
   }
   
   public static function getInformation($userAgent) {
-    $startTime = microtime(true);
     $browsers = self::getBrowserList();
-    echo 'Took ' . (microtime(true) - $startTime) . 's';
     $matchedBrowser = null;
     foreach($browsers as $pattern => $browser) {
       if(fnmatch($pattern, $userAgent)) {
