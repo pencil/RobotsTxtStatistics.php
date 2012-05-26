@@ -1,0 +1,1 @@
+CREATE TABLE requests (timestamp INTEGER, type TEXT, name TEXT, useragent TEXT);

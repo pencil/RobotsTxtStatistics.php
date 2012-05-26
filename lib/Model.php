@@ -12,4 +12,12 @@ class Model {
     $statement->execute(array(time(), $browserInformation['Crawler'] ? 'crawler' : 'browser', $browserInformation['Browser'], $userAgent));
     //}
   }
+  
+  public static function getTop($limit = null, $timestampStart = null, $timestampEnd = null) {
+    $pdo = Db::getPdoInstance();
+    $statement = $pdo->prepare('SELECT name, timestamp as last_request, COUNT(*) AS total_requests FROM requests GROUP BY name ORDER BY total_requests LIMIT :limit');
+    $statement->bindValue(':limit', $limit === null ? 30 : $limit, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchAll();
+  }
 }
